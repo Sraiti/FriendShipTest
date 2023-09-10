@@ -3,10 +3,11 @@ import { prop } from "@typegoose/typegoose/lib/prop";
 import { Model } from "mongoose";
 import { ModelFunction } from "../../core/baseModelFunction";
 import { userType } from "../../enums/auth";
-import { Field } from "type-graphql";
+import { Field, ObjectType } from "type-graphql";
 import { Questionnaire } from "../questionnaires/model";
 // import { Questionnaire } from "../questionnaires/model";
 
+@ObjectType()
 export class User {
   //@Field()
   @prop({ required: true })
@@ -22,7 +23,7 @@ export class User {
   @prop({ required: true, default: userType.user })
   role!: userType;
 
-  //@Field(() => [Questionnaire])
+  @Field(() => [Questionnaire])
   @prop({ ref: () => "Questionnaire" })
   questionnaires?: Ref<Questionnaire>[];
 }

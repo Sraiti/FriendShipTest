@@ -1,27 +1,11 @@
 import { Ref, getModelForClass } from "@typegoose/typegoose";
 import { prop } from "@typegoose/typegoose/lib/prop";
 import { ModelFunction } from "../../core/baseModelFunction";
-import { Field } from "type-graphql";
+import { Field, ObjectType } from "type-graphql";
 import { User } from "../user/model";
+import { Question, QuestionnaireStatus, Visibility } from "./types";
 
-enum QuestionnaireStatus {
-  DRAFT = "draft",
-  PUBLISHED = "published",
-  ARCHIVED = "archived",
-}
-
-enum Visibility {
-  PUBLIC = "public",
-  PRIVATE = "private",
-  RESTRICTED = "restricted",
-}
-
-interface Question {
-  questionText: string;
-  options: string[];
-  correctOption: number;
-}
-
+@ObjectType()
 export class Questionnaire {
   @prop({
     ref: () => "User",
@@ -29,9 +13,11 @@ export class Questionnaire {
   creatorId!: Ref<User>;
 
   @prop()
+  @Field()
   title!: string;
 
   @prop()
+  @Field()
   description?: string;
 
   @prop({ enum: QuestionnaireStatus, default: QuestionnaireStatus.DRAFT })

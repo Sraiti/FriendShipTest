@@ -1,4 +1,4 @@
-import {
+import mongoose, {
   FilterQuery,
   Model,
   UpdateQuery,
@@ -78,6 +78,23 @@ export class ModelFunction<T> {
     return this.model.find(objetToFind, options).exec() as Promise<T>;
   };
 
+  searchById = (id: mongoose.Types.ObjectId, options?: QueryOptions) => {
+    // Return a promise that resolves to the found document or null
+    return this.model
+      .findById(id, options)
+      .exec()
+      .then((document) => {
+        if (document) {
+          ///Return as T so i can have intellisense on the other side YAY
+          return document as T;
+        }
+        ///Return Null if nothing
+
+        return null;
+      });
+
+    // Return a promise that resolves to the found documents the same as above fancier
+  };
   aggregate = (pipelines: Array<PipelineStage>, options?: AggregateOptions) => {
     this.model.aggregate(pipelines, options as any);
   };
