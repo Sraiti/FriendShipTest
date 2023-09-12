@@ -3,7 +3,20 @@ import { prop } from "@typegoose/typegoose/lib/prop";
 import { ModelFunction } from "../../core/baseModelFunction";
 import { Field, ObjectType } from "type-graphql";
 import { User } from "../user/model";
-import { Question, QuestionnaireStatus, Visibility } from "./types";
+import { QuestionnaireStatus, Visibility } from "./types";
+
+@ObjectType()
+export class Question {
+  @prop()
+  @Field((type) => String, { nullable: true })
+  questionText?: string;
+  @prop()
+  @Field((type) => [String], { nullable: true })
+  options?: string[];
+  @prop()
+  @Field((type) => Number, { nullable: true })
+  correctOption?: number;
+}
 
 @ObjectType()
 export class Questionnaire {
@@ -17,12 +30,14 @@ export class Questionnaire {
   title!: string;
 
   @prop()
-  @Field()
+  @Field((type) => String, { nullable: true })
   description?: string;
 
+  @Field()
   @prop({ enum: QuestionnaireStatus, default: QuestionnaireStatus.DRAFT })
   status?: QuestionnaireStatus;
 
+  @Field((type) => [String], { nullable: true })
   @prop()
   tags?: string[];
 
@@ -35,24 +50,31 @@ export class Questionnaire {
   @prop()
   timeLimit?: number;
 
+  @Field()
   @prop({ enum: Visibility, default: Visibility.PUBLIC })
   visibility?: Visibility;
 
+  @Field((type) => [Question], { nullable: true })
   @prop({})
   questions!: Question[];
 
+  @Field((type) => [String], { nullable: true })
   @prop({})
   respondents?: string[];
 
+  @Field((type) => Number, { nullable: true })
   @prop()
   totalAttempts?: number;
 
+  @Field((type) => Number, { nullable: true })
   @prop()
   averageScore?: number;
 
+  @Field((type) => Number, { nullable: true })
   @prop()
   highestScore?: number;
 
+  @Field((type) => Number, { nullable: true })
   @prop()
   version?: number;
 }

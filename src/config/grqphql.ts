@@ -31,10 +31,6 @@ export async function setUpGraphQL(app: any) {
 
   // Specify the path where we'd like to mount our server
 
-  app.use(
-    "/graphql",
-
-    expressMiddleware(server),
-  );
+  app.use("/graphql", expressMiddleware(server));
   // Create GraphQL server
 }

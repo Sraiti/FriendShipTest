@@ -8,17 +8,17 @@ export class questionnaireInputType {
   @Field({ nullable: true, defaultValue: "" })
   description?: string;
 
-  // @Field({})
-  // status?: QuestionnaireStatus;
+  @Field({})
+  status?: QuestionnaireStatus;
 
-  // @Field()
-  // tags?: string[];
+  @Field()
+  tags?: string[];
 
-  // @Field()
-  // startTime?: Date;
+  @Field()
+  startTime?: Date;
 
-  // @Field()
-  // endTime?: Date;
+  @Field()
+  endTime?: Date;
 
   // @Field()
   // timeLimit?: number;
@@ -26,21 +26,21 @@ export class questionnaireInputType {
   // @Field({})
   // visibility?: Visibility;
 
-  // @Field({})
-  // questions!: Question[];
+  @Field({})
+  questions!: Question[];
 
-  // @Field({})
-  // respondents?: string[];
+  @Field({})
+  respondents?: string[];
 
-  // @Field()
-  // totalAttempts?: number;
+  @Field()
+  totalAttempts?: number;
 
-  // @Field()
-  // averageScore?: number;
+  @Field()
+  averageScore?: number;
 
-  // @Field()
-  // highestScore?: number;
+  @Field()
+  highestScore?: number;
 
-  // @Field()
-  // version?: number;
+  @Field()
+  version?: number;
 }

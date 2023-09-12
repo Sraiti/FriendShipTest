@@ -9,9 +9,3 @@ export enum Visibility {
   PRIVATE = "private",
   RESTRICTED = "restricted",
 }
-
-export interface Question {
-  questionText: string;
-  options: string[];
-  correctOption: number;
-}

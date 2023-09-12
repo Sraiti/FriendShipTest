@@ -7,7 +7,22 @@ type Query {
   questionnaire(id: String!): Questionnaire!
 }
 
+type Question {
+  correctOption: Float
+  options: [String!]
+  questionText: String
+}
+
 type Questionnaire {
-  description: String!
+  averageScore: Float
+  description: String
+  highestScore: Float
+  questions: [Question!]
+  respondents: [String!]
+  status: String!
+  tags: [String!]
   title: String!
+  totalAttempts: Float
+  version: Float
+  visibility: String!
 }
