@@ -1,5 +1,7 @@
 import { Field, InputType } from "type-graphql";
-import { Question, QuestionnaireStatus, Visibility } from "./types";
+import { QuestionnaireStatus, Visibility } from "./types";
+import { Question } from "./model";
+import { type } from "os";
 
 @InputType()
 export class questionnaireInputType {
@@ -11,7 +13,7 @@ export class questionnaireInputType {
   @Field({})
   status?: QuestionnaireStatus;
 
-  @Field()
+  @Field((type) => [String])
   tags?: string[];
 
   @Field()
@@ -20,27 +22,27 @@ export class questionnaireInputType {
   @Field()
   endTime?: Date;
 
-  // @Field()
-  // timeLimit?: number;
-
-  // @Field({})
-  // visibility?: Visibility;
+  @Field()
+  timeLimit?: number;
 
   @Field({})
+  visibility?: Visibility;
+
+  @Field((type) => [Question])
   questions!: Question[];
 
-  @Field({})
+  @Field((type) => [String])
   respondents?: string[];
 
-  @Field()
-  totalAttempts?: number;
+  // @Field()
+  // totalAttempts?: number;
 
-  @Field()
-  averageScore?: number;
+  // @Field()
+  // averageScore?: number;
 
-  @Field()
-  highestScore?: number;
+  // @Field()
+  // highestScore?: number;
 
-  @Field()
-  version?: number;
+  // @Field()
+  // version?: number;
 }

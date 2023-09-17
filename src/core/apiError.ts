@@ -2,16 +2,20 @@ class ApiError extends Error {
   statusCode: number;
   details: any;
   isOperational: boolean;
+  isDBerror: boolean;
   constructor(
     statusCode: number,
     message: string,
+    isDBerror = false,
+
     details?: any,
     isOperational = true,
-    stack = ""
+    stack = "",
   ) {
     super(message);
     this.statusCode = statusCode;
     this.isOperational = isOperational;
+    this.isDBerror = isDBerror;
     if (stack) {
       this.stack = stack;
     } else {
@@ -19,6 +23,8 @@ class ApiError extends Error {
     }
     if (details) {
       this.details = details;
+    }
+    if (isDBerror) {
     }
   }
 }

@@ -18,7 +18,7 @@ export class ModelFunction<T> {
     array: Array<T>,
     filter: string,
     filteringField?: string,
-    extraFilters?: any
+    extraFilters?: any,
   ) => {
     const extractValue = (obj: any, path: string) => {
       const pathList = path
@@ -57,7 +57,7 @@ export class ModelFunction<T> {
   search = (
     objetToFind: FilterQuery<T>,
     single?: boolean,
-    options?: QueryOptions
+    options?: QueryOptions,
   ) => {
     if (single) {
       // Return a promise that resolves to the found document or null
@@ -104,7 +104,7 @@ export class ModelFunction<T> {
   update = (
     filters: FilterQuery<T>,
     objetToCreate: UpdateQuery<T>,
-    single: boolean
+    single: boolean,
   ) => {
     if (single) {
       return this.model.updateOne(filters, objetToCreate, {

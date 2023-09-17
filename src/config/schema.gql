@@ -4,11 +4,12 @@
 # -----------------------------------------------
 
 type Query {
-  questionnaire(id: String!): Questionnaire!
+  getQuestionnaire(id: String!): Questionnaire!
 }
 
 type Question {
   correctOption: Float
+  id: String!
   options: [String!]
   questionText: String
 }

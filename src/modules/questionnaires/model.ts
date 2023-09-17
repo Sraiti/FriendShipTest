@@ -4,9 +4,13 @@ import { ModelFunction } from "../../core/baseModelFunction";
 import { Field, ObjectType } from "type-graphql";
 import { User } from "../user/model";
 import { QuestionnaireStatus, Visibility } from "./types";
+import { uuid } from "uuidv4";
 
 @ObjectType()
 export class Question {
+  @prop({ default: uuid(), type: String })
+  @Field((type) => String, { nullable: false })
+  id?: string;
   @prop()
   @Field((type) => String, { nullable: true })
   questionText?: string;
@@ -55,7 +59,7 @@ export class Questionnaire {
   visibility?: Visibility;
 
   @Field((type) => [Question], { nullable: true })
-  @prop({})
+  @prop({ type: Question, default: [] })
   questions!: Question[];
 
   @Field((type) => [String], { nullable: true })
@@ -79,7 +83,9 @@ export class Questionnaire {
   version?: number;
 }
 
-const schema = getModelForClass(Questionnaire);
+const schema = getModelForClass(Questionnaire, {
+  schemaOptions: { timestamps: true },
+});
 class schemaModelFunction extends ModelFunction<Questionnaire> {
   constructor(schema: any) {
     super(schema);
