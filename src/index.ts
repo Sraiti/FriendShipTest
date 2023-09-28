@@ -13,7 +13,6 @@ dotenv.config();
 
 const app = express();
 connectDB();
-
 // Global Middlewares
 app.use(cors());
 app.use(express.json());
@@ -23,8 +22,7 @@ setRoutes(app);
 app.use(errorConverter);
 app.use(errorHandler);
 
-///Setup GraphQL
-
+///Setup GraphQL∫
 const graphQLServer = setUpGraphQL(app);
 
 // Start server

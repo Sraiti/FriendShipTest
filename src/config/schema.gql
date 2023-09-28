@@ -3,6 +3,10 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Mutation {
+  createQuestionnaire(data: questionnaireInputType!): Questionnaire!
+}
+
 type Query {
   getQuestionnaire(id: String!): Questionnaire!
 }
@@ -14,6 +18,12 @@ type Question {
   questionText: String
 }
 
+input QuestionInputType {
+  correctOption: Float!
+  options: [String!]!
+  questionText: String!
+}
+
 type Questionnaire {
   averageScore: Float
   description: String
@@ -22,8 +32,33 @@ type Questionnaire {
   respondents: [String!]
   status: String!
   tags: [String!]
+  timeLimit: Float!
   title: String!
   totalAttempts: Float
   version: Float
   visibility: String!
+}
+
+"""Draft or ARCHIVED or Published """
+enum QuestionnaireStatus {
+  ARCHIVED
+  DRAFT
+  PUBLISHED
+}
+
+"""Visibility of the Questionnaire Public | Private |RESTRICTED"""
+enum Visibility {
+  PRIVATE
+  PUBLIC
+  RESTRICTED
+}
+
+input questionnaireInputType {
+  description: String = ""
+  questions: [QuestionInputType!]
+  status: QuestionnaireStatus! = DRAFT
+  tags: [String!]!
+  timeLimit: Float
+  title: String!
+  visibility: Visibility!
 }

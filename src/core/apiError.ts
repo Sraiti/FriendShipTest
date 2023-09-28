@@ -7,7 +7,6 @@ class ApiError extends Error {
     statusCode: number,
     message: string,
     isDBerror = false,
-
     details?: any,
     isOperational = true,
     stack = "",

@@ -1,14 +1,15 @@
 import { Ref, getModelForClass } from "@typegoose/typegoose";
 import { prop } from "@typegoose/typegoose/lib/prop";
 import { ModelFunction } from "../../core/baseModelFunction";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { User } from "../user/model";
 import { QuestionnaireStatus, Visibility } from "./types";
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 
+/* @InputType() */
 @ObjectType()
 export class Question {
-  @prop({ default: uuid(), type: String })
+  @prop({ default: v4(), type: String })
   @Field((type) => String, { nullable: false })
   id?: string;
   @prop()
@@ -45,12 +46,7 @@ export class Questionnaire {
   @prop()
   tags?: string[];
 
-  @prop()
-  startTime?: Date;
-
-  @prop()
-  endTime?: Date;
-
+  @Field()
   @prop()
   timeLimit?: number;
 

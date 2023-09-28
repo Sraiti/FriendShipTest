@@ -26,14 +26,15 @@ export class QuestionnaireResolver {
     return questionnaire;
   }
 
-  @Mutation((returns) => Questionnaire)
+  @Mutation((returns) => Questionnaire || ApiError)
   async createQuestionnaire(
     @Arg("data") data: questionnaireInputType,
     @Ctx() ctx: UserContext,
-  ): Promise<boolean | ApiError> {
+  ): Promise<any | ApiError> {
     try {
+      log({ data, ctx });
       const questionnaire = await QuestionnaireInstance.save(data);
-      return true;
+      return questionnaire;
     } catch (error: any) {
       throw new ApiError(404, error.message, true);
     }
